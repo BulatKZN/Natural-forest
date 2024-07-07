@@ -6,6 +6,7 @@
 
 :root {
     --index: calc(1vw + 1vh);
+    --transition: 1.5s cubic-bezier(.05, .5, 0, 1);
 }
 
 @font-face {
@@ -26,12 +27,13 @@ body {
 }
 
 .logo {
-    height: calc(var(--index)* 7.8);
-    width: calc(var(--index)* 7.8);
+    --logo-size: calc(var(--index) * 7.8);
+    height: var(--logo-size);
+    width: var(--logo-size);
     background-repeat: no-repeat;
     position: absolute;
-    left: 50%;
-    top: 10%;
+    left: calc(50% - calc(var(--logo-size) / 2));
+    top: calc(var(--index)* 2.8);
     z-index: 1;
 }
 
@@ -42,8 +44,11 @@ body {
 
 .layers__container {
     height: 100vh;
+    min-height: 500px;
     transform-style: preserve-3d;
     transform: rotateX(var(--move-y)) rotateY(var(--move-x));
+    will-change: transform;
+    transition: transform var(--transition);
 }
 
 .layers__item {
@@ -79,4 +84,25 @@ body {
 
 .layer-6 {
     transform: translateZ(380px);
+}
+
+.hero-content {
+    font-size: calc(var(--index) * 2.9);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: calc(var(--index) * -.15);
+    line-height: 1.35em;
+    margin-top: calc(var(--index) * 5.5);
+}
+
+.hero-content span {
+    display: block;
+}
+
+.hero-content p {
+    text-transform: none;
+    font-family: merriweather-italic-3d;
+    letter-spacing: normal;
+    font-size: calc(var(--index) * .73);
+    line-height: 3;
 }
